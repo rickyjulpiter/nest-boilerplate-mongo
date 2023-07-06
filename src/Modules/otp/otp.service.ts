@@ -26,15 +26,11 @@ export class OtpService {
     return this.otpModel.findOneAndUpdate({ email }, { status: false });
   }
 
-  async findOne(email: string, otp: string) {
+  async findOne(email: string, otp: string): Promise<Otp | null> {
     return this.otpModel.findOne({ otp, email, status: true });
-    // return await this.otpRepository.findOne({
-    //   where: { otp, email, status: 1 },
-    //   order: [['createdAt', 'DESC']],
-    // });
   }
 
-  async sendOTPEmail(email: string) {
+  async sendOTPEmail(email: string): Promise<void> {
     const expiredAt = moment().add(10, 'minutes');
     const otp = await generate(6, {
       upperCaseAlphabets: false,

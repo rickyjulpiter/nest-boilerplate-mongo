@@ -17,10 +17,8 @@ import { AuthService } from './Modules/auth/auth.service';
 import { UsersService } from './Modules/users/users.service';
 import { OtpService } from './Modules/otp/otp.service';
 
-import { AuthDto } from './Modules/auth/auth.dto';
+import { AuthDto } from './Modules/auth/dto/auth.dto';
 import { UserDto } from './Modules/users/dto/user.dto';
-
-import { User } from './Schemas/user.schema';
 
 import Helpers from './Helpers/helpers';
 
@@ -42,7 +40,7 @@ export class AppController {
     description: '',
     tags: ['Default'],
   })
-  healthCheck(@Res() res): string {
+  healthCheck(@Res() res): void {
     return this.helpers.response(res, HttpStatus.OK, 'Health Check');
   }
 
@@ -52,7 +50,7 @@ export class AppController {
     tags: ['Registration'],
   })
   @Post('auth/sign-up')
-  async signUp(@Body() user: UserDto, @Res() res): Promise<User> {
+  async signUp(@Body() user: UserDto, @Res() res): Promise<void> {
     const password = await this.helpers.hashPassword(user.password);
 
     await this.usersService.create(user, password);

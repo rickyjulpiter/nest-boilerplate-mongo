@@ -5,7 +5,7 @@ import { S3 } from 'aws-sdk';
 export class UploadFileService {
   async upload(file): Promise<any> {
     const { originalname } = file;
-    const bucketS3 = process.env.BUCKET;
+    const bucketS3 = process.env.AWS_BUCKET;
 
     return await this.uploadS3(file.buffer, bucketS3, originalname);
   }

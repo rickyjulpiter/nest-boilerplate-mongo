@@ -1,11 +1,9 @@
-export const USER_REPOSITORY = 'USERS_REPOSITORY';
-export const OTP_REPOSITORY = 'OTP_REPOSITORY';
+import * as dotenv from 'dotenv';
+import * as process from 'process';
 
-export const jwtConstants = {
-  secret: 'secretKey',
+dotenv.config();
+
+export const JWT_CONSTANTS = {
+  secret: process.env.JWT_KEY,
+  expiresIn: process.env.JWT_TOKEN_EXPIRATION,
 };
-
-export const SEQUELIZE = 'SEQUELIZE';
-export const DEVELOPMENT = 'development';
-export const TEST = 'test';
-export const PRODUCTION = 'production';
